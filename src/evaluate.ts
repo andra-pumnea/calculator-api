@@ -6,12 +6,13 @@ interface Operation{
     precedence: number;
 }
 
-
+// check if token is number
 export function isNumber(token: string): boolean{
     // returns true if NaN, otherwise false so we need to negate
     return ! isNaN(Number(token));
 }
 
+// convert token to Operator interface
 function convertOperator(token: String): Operation{
     var op;
     switch(token){
@@ -33,14 +34,17 @@ function convertOperator(token: String): Operation{
     return op;
 }
 
+// return the last element added to the stack
 export function peek(stack: Array<String>): String{
     return stack[stack.length-1];
 }
 
+// check which operator has higher precedence
 function getPrecedence(op1: Operation, op2: Operation): boolean{
     return op1.precedence > op2.precedence;
 }
 
+// extract operators and numbers from expression
 function splitTokens(expression: string): Array<String>{
     const regex = new RegExp("[+/*()-]|[0123456789]+", "g");
     let matches = new Array<String>();
@@ -51,6 +55,7 @@ function splitTokens(expression: string): Array<String>{
     return matches;
   }
 
+// apply operators on the queue and compute intermediate results
 function applyOperator(operator_stack: Array<String>, values_queue: Array<String>){
       let op = operator_stack.pop();
       let left_term = values_queue.pop();
@@ -59,6 +64,7 @@ function applyOperator(operator_stack: Array<String>, values_queue: Array<String
       values_queue.push(String(result));  
 }
 
+// evaluate mathematical expression based on current token
 function evaluteExpression(token: string){
     if(isNumber(token)){
         values_queue.push(token);
@@ -86,6 +92,7 @@ function evaluteExpression(token: string){
     }
 }
 
+// return the result of the mathematical expression
 export function calculate(expression: string){
     let tokens = splitTokens(expression); 
     tokens.forEach(evaluteExpression);
