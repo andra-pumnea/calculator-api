@@ -82,7 +82,10 @@ function calculate(expression) {
     while (operator_stack.length !== 0) {
         applyOperator(operator_stack, values_queue);
     }
-    console.log(values_queue);
+    if (values_queue.length !== 0) {
+        return { 'error': false, 'result': values_queue[0] };
+    }
+    return { 'error': true, 'result': "expression is incorrect" };
 }
 exports.calculate = calculate;
 //# sourceMappingURL=evaluate.js.map

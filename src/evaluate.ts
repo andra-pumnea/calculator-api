@@ -51,7 +51,7 @@ function splitTokens(expression: string): Array<String>{
     return matches;
   }
 
-  function applyOperator(operator_stack: Array<String>, values_queue: Array<String>){
+function applyOperator(operator_stack: Array<String>, values_queue: Array<String>){
       let op = operator_stack.pop();
       let left_term = values_queue.pop();
       let right_term = values_queue.pop();
@@ -92,5 +92,8 @@ export function calculate(expression: string){
     while(operator_stack.length !== 0){
         applyOperator(operator_stack, values_queue)
     }
-    return values_queue;
+    if(values_queue.includes("NaN")){
+        return {'error': true, 'result': "expression is incorrect"};
+    }
+    return {'error': false, 'result': values_queue[0]};
 }

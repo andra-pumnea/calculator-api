@@ -15,10 +15,4 @@ test('should return True is string is numeric, false otherwise', () => {
     expect(evaluate_2.isNumber('1')).toBe(true);
     expect(evaluate_2.isNumber('1234')).toBe(true);
 });
-
-// calculate('((20 - 10 ) * (30 - 20) / 10 + 10 ) * 2');
-// calculate("3+4*2/(1-5)")
-// calculate('2*(23/(33))-23*(23)');
-// calculate('4+5-((2+1)*3+4)/2')
-
 //# sourceMappingURL=server.test.js.map
