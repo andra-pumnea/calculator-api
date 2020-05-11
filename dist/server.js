@@ -20,42 +20,19 @@ function div(x, y) {
     return x / y;
 }
 app.get('/calculus', (request, response) => {
-    response.send(decodeQuery(request.query.query));
+    let query = decodeQuery(request.query.query);
+    let calculated_expression = evaluate_1.calculate(query);
+    response.send(calculated_expression);
 });
 function decodeQuery(encoded) {
     const decoded = Buffer.from(encoded, 'base64').toString('ascii');
     return decoded;
 }
-function tryQueue() {
-    let stack = new Array();
-    stack.unshift('A');
-    stack.unshift('B');
-    stack.unshift('C');
-    console.log(stack);
-    console.log(stack[0]);
-}
-function tryStack() {
-    let stack = new Array();
-    stack.push('A');
-    stack.push('B');
-    stack.push('C');
-    console.log(stack);
-    console.log(stack[0]);
-}
-function splitTokens(expression) {
-    let rx = new RegExp("[+/*()-]|[0123456789]+", "g");
-    let matches = new Array();
-    var match;
-    while ((match = rx.exec(expression)) !== null) {
-        matches.push(match[0]);
-    }
-    console.log(matches);
-    return matches;
-}
 // calculate('((20 - 10 ) * (30 - 20) / 10 + 10 ) * 2');
-evaluate_1.calculate("3+4*2/(1-5)");
-evaluate_1.calculate('2*(23/(33))-23*(23)');
+// calculate("3+4*2/(1-5)")
+// calculate('2*(23/(33))-23*(23)');
+// calculate('4+5-((2+1)*3+4)/2')
 app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}/calculus?query=Misy`);
+    console.log(`server started at http://localhost:${port}/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp`);
 });
 //# sourceMappingURL=server.js.map

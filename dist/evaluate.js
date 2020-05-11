@@ -45,13 +45,12 @@ function splitTokens(expression) {
 }
 function applyOperator(operator_stack, values_queue) {
     let op = operator_stack.pop();
-    let right_term = values_queue.pop();
     let left_term = values_queue.pop();
+    let right_term = values_queue.pop();
     let result = eval(`${right_term}${op}${left_term}`);
     values_queue.push(String(result));
 }
 function evaluteExpression(token) {
-    console.log(token);
     if (isNumber(token)) {
         values_queue.push(token);
     }

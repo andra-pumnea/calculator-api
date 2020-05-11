@@ -92,5 +92,5 @@ export function calculate(expression: string){
     while(operator_stack.length !== 0){
         applyOperator(operator_stack, values_queue)
     }
-    console.log(values_queue)
+    return values_queue;
 }

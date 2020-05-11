@@ -22,7 +22,9 @@ function div(x:number, y:number): number {
  
 app.get('/calculus', (request, response) => {
 
-  response.send(decodeQuery(request.query.query));
+  const query = decodeQuery(request.query.query)
+  const calculated_expression = calculate(query)
+  response.send(calculated_expression[0]);
 });
 
 function decodeQuery(encoded: string): string {
@@ -30,21 +32,6 @@ function decodeQuery(encoded: string): string {
   return decoded;
 }
 
-function splitTokens(expression: string): Array<String>{
-  let rx = new RegExp("[+/*()-]|[0123456789]+", "g");
-  let matches = new Array<String>();
-  var match;
-  while((match = rx.exec(expression)) !== null){
-    matches.push(match[0]);
-  }
-  return matches
-}
-
-calculate('((20 - 10 ) * (30 - 20) / 10 + 10 ) * 2');
-calculate("3+4*2/(1-5)")
-calculate('2*(23/(33))-23*(23)');
-calculate('4+5-((2+1)*3+4)/2')
-
 app.listen( port, () => {
-  console.log( `server started at http://localhost:${ port }/calculus?query=Misy` );
+  console.log( `server started at http://localhost:${ port }/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp` );
 } );
