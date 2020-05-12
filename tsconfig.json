@@ -5,6 +5,7 @@
       "outDir": "./dist",
       "baseUrl": "./src",
       "module": "CommonJS",
+      "strict": true,
       "esModuleInterop": true
     },
     "include": [

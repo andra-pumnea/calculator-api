@@ -13,9 +13,9 @@ function decodeQuery(encoded: string): string {
 // display the result of the mathematical expression or error
 app.get('/calculus', (request, response) => {
 
-  const query = decodeQuery(request.query.query)
+  const query = decodeQuery(request.query.query as string)
   const calculated_expression = calculate(query)
-  response.send(calculated_expression);
+  response.send(JSON.stringify(calculated_expression));
 });
 
 // start server

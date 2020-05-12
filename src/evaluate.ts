@@ -15,7 +15,7 @@ export function isNumber(token: String): boolean{
 
 // convert token to Operator interface
 function convertOperator(token: String): Operation{
-    var op;
+    let op : Operation = {name: '', precedence:-1};
     switch(token){
         case "+":
             op = {name: '+', precedence:0};
@@ -107,8 +107,8 @@ function evaluteExpression(token: String, calculator_states: any[]){
 
 // return the result of the mathematical expression
 export function calculate(expression: string){
-    let operator_stack = new Array<String>();
-    let values_queue = new Array<String>();
+    let operator_stack: String[] = [];
+    let values_queue: String[] = [];
     let calculator_states = [operator_stack, values_queue]
     let tokens = splitTokens(expression); 
     for (let token of tokens){
