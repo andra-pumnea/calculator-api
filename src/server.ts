@@ -20,6 +20,6 @@ app.get('/calculus', (request, response) => {
 
 // start server
 app.listen( port, () => {
-  // console.log( `server started at http://localhost:${ port }/calculus?query=Misv` );
-  console.log( `server started at http://localhost:${ port }/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp` );
+  // console.log( `server started at http://localhost:${ port }/calculus?query=Misv`);
+  console.log( `server started at http://localhost:${ port }/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp`);
 } );
