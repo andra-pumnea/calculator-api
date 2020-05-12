@@ -57,68 +57,68 @@ function splitTokens(expression: string): Array<String>{
   }
 
 // apply operators on the queue and compute intermediate results
-function applyOperator(calculator_states: any[]){
-      let op = calculator_states[OPERATORS].pop();
-      let left_term = calculator_states[VALUES].pop();
-      let right_term = calculator_states[VALUES].pop();
-      let result = eval(`${right_term}${op}${left_term}`);
-      calculator_states[VALUES].push(String(result));  
-      return calculator_states;
+function applyOperator(calculatorStates: any[]){
+      let op = calculatorStates[OPERATORS].pop();
+      let leftTerm = calculatorStates[VALUES].pop();
+      let rightTerm = calculatorStates[VALUES].pop();
+      let result = eval(`${rightTerm}${op}${leftTerm}`);
+      calculatorStates[VALUES].push(String(result));  
+      return calculatorStates;
 }
 
-function evaluateParanthesisExpression(calculator_states: any[]){
-    let top = peek(calculator_states[OPERATORS])
+function evaluateParanthesisExpression(calculatorStates: any[]){
+    let top = peek(calculatorStates[OPERATORS])
     while(((top !== undefined)) && (top !== '(')){
-        calculator_states = applyOperator(calculator_states);
-        top = peek(calculator_states[OPERATORS]); 
+        calculatorStates = applyOperator(calculatorStates);
+        top = peek(calculatorStates[OPERATORS]); 
     }
-    return calculator_states;
+    return calculatorStates;
 }
 
-function evaluateOperatorExpression(token: String, calculator_states: any[]){
-    let top = peek(calculator_states[OPERATORS])
+function evaluateOperatorExpression(token: String, calculatorStates: any[]){
+    let top = peek(calculatorStates[OPERATORS])
     let op1 = convertOperator(top)
     let op2 = convertOperator(token)
     while((op1 !== undefined) && ((top !== undefined) ) && (top !== '(') && (top !== ')') && (getPrecedence(op1, op2))){
-        calculator_states = applyOperator(calculator_states);
-        top = peek(calculator_states[OPERATORS])
+        calculatorStates = applyOperator(calculatorStates);
+        top = peek(calculatorStates[OPERATORS])
     }
-    return calculator_states;
+    return calculatorStates;
 }
 
 // evaluate mathematical expression based on current token
-function evaluteExpression(token: String, calculator_states: any[]){
+function evaluteExpression(token: String, calculatorStates: any[]){
     if(isNumber(token)){
-        calculator_states[VALUES].push(token);
+        calculatorStates[VALUES].push(token);
     }
     else if(token === '(') {
-        calculator_states[OPERATORS].push(token);
+        calculatorStates[OPERATORS].push(token);
     }
     else if(token === ')') {
-        calculator_states = evaluateParanthesisExpression(calculator_states);
-        calculator_states[OPERATORS].pop(); //Discard the '('
+        calculatorStates = evaluateParanthesisExpression(calculatorStates);
+        calculatorStates[OPERATORS].pop(); //Discard the '('
     }
     else {
-        calculator_states = evaluateOperatorExpression(token, calculator_states);
-        calculator_states[OPERATORS].push(token);
+        calculatorStates = evaluateOperatorExpression(token, calculatorStates);
+        calculatorStates[OPERATORS].push(token);
     }
-    return calculator_states;
+    return calculatorStates;
 }
 
 // return the result of the mathematical expression
 export function calculate(expression: string){
-    let operator_stack: String[] = [];
-    let values_queue: String[] = [];
-    let calculator_states = [operator_stack, values_queue]
+    let operatorStack: String[] = [];
+    let valuesQueue: String[] = [];
+    let calculatorStates = [operatorStack, valuesQueue]
     let tokens = splitTokens(expression); 
     for (let token of tokens){
-        calculator_states = evaluteExpression(token, calculator_states);
+        calculatorStates = evaluteExpression(token, calculatorStates);
     }
-    while(operator_stack.length !== 0){
-        calculator_states = applyOperator(calculator_states);
+    while(operatorStack.length !== 0){
+        calculatorStates = applyOperator(calculatorStates);
     }
-    if(values_queue.includes("NaN")){
+    if(valuesQueue.includes("NaN")){
         return {'error': true, 'result': "expression is incorrect"};
     }
-    return {'error': false, 'result': values_queue[0]};
+    return {'error': false, 'result': valuesQueue[0]};
 }
