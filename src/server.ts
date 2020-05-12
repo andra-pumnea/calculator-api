@@ -14,8 +14,8 @@ function decodeQuery(encoded: string): string {
 app.get('/calculus', (request, response) => {
 
   const query = decodeQuery(request.query.query as string)
-  const calculated_expression = calculate(query)
-  response.send(JSON.stringify(calculated_expression));
+  const calculatedExpression = calculate(query)
+  response.send(JSON.stringify(calculatedExpression));
 });
 
 // start server
