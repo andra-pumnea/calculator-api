@@ -106,11 +106,6 @@ interface CalculatorState {
     valuesQueue: string[];
 }
 
-interface CalculatorResult {
-    error: boolean;
-    result: string;
-}
-
 // return the result of the mathematical expression
 export function calculate(expression: string): CalculatorResult{
     let calculatorStates: CalculatorState = {operatorStack:[], valuesQueue:[]}
@@ -121,8 +116,5 @@ export function calculate(expression: string): CalculatorResult{
     while(calculatorStates.operatorStack.length !== 0){
         calculatorStates = applyOperator(calculatorStates);
     }
-    if(calculatorStates.valuesQueue.includes("NaN")){
-        return {'error': true, 'result': "expression is incorrect"};
-    }
-    return {'error': false, 'result': calculatorStates.valuesQueue[0]};
+    return calculatorStates.valuesQueue[0];
 }

@@ -5,7 +5,7 @@ const app = express();
 const port = 5050;
 
 // decode query from base64 to ascii
-function decodeQuery(encoded: string): string {
+export function decodeQuery(encoded: string): string {
   const decoded = Buffer.from(encoded, 'base64').toString('ascii')
   return decoded;
 }
