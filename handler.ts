@@ -32,6 +32,8 @@ const calculator: Handler = (event: any, context: Context, callback: Callback) =
     const response = getResponse(calculatedExpression);
     callback(undefined, {statusCode: 200, body: JSON.stringify(response)} );
   }
+  // TODO: error callback
+  callback(undefined, {statusCode: 200, body: JSON.stringify("Please enter query")} );
 };
 
 export { calculator }
