@@ -2,7 +2,7 @@ import {peek} from '../evaluate';
 import {isNumber} from '../evaluate';
 
 test('should return a string which is the latest item added to the stack', () => {
-    let stack = new Array<String>();
+    const stack: string[] = [];
     stack.push('A')
     stack.push('B')
     stack.push('C')
