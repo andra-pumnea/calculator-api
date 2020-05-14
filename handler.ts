@@ -12,24 +12,26 @@ function decodeQuery(encoded: string): string {
   return decoded;
 }
 
-const calculator: Handler = (event: any, context: Context, callback: Callback) => {
-  const query = decodeQuery("MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp")
-  const calculatedExpression = calculate(query)
-  console.log(calculatedExpression)
-  let response: CalculatorResult;
+function checkIfQueryExists(event: any): boolean{
+  return event.queryStringParameters !== null;
+}
+
+function getResponse(calculatedExpression: string): CalculatorResult {
   if(calculatedExpression !== "NaN"){
-    response = {
-      error: false,
-      result: JSON.stringify(calculatedExpression)
-  } }
+    return {error: false, result: calculatedExpression} 
+  } 
   else {
-      response = {
-        error: true,
-        result: JSON.stringify("expression is incorrect")
-      }
+      return {error: true, result: "expression is incorrect"}
   }
-  console.log(response)
-  callback(undefined, response);
+}
+
+const calculator: Handler = (event: any, context: Context, callback: Callback) => {
+  if(checkIfQueryExists(event)){
+    const query = decodeQuery(event.queryStringParameters.query)
+    const calculatedExpression = calculate(query)
+    const response = getResponse(calculatedExpression);
+    callback(undefined, {statusCode: 200, body: JSON.stringify(response)} );
+  }
 };
 
 export { calculator }

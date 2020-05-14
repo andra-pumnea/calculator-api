@@ -21,9 +21,13 @@ functions:
     handler: handler.calculator
 
     events:
-      - http:
-          path: /calculus
-          method: get
+    - http:
+        path: /calculus
+        method: GET
+        request:
+            parameters:
+              querystrings:
+                query: false
 
 plugins:
   - serverless-plugin-typescript
