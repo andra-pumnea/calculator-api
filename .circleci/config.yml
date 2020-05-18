@@ -11,10 +11,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            - run:
-              name: Setup build 
-              command: mkdir ~/test-results
-                       mkdir ~/test-results/jest
+            - run: mkdir ~/test-results
+            - run: mkdir ~/test-results/jest
             - store_test_results:
                 path: test-results/jest
             - store_artifacts:
