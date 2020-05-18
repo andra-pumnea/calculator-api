@@ -31,3 +31,14 @@ Required:
 - When writing your code, imagine the service is meant to be released to production (with a low-to-moderate expected load).
 - Heroku or AWS might be a good place to publish your service. Please document your deployment process. 
 - The source code should be shared, either on public repository or a repository that Futurice can access. For example, GitHub is a good option.
+
+## Project Setup 
+
+npm install
+
+### Run locally:
+npm run dev
+
+### Run tests:
+npm test
+npm run converage
