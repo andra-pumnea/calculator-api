@@ -9,3 +9,4 @@ jspm_packages
 .vscode/
 node_modules/
 dist/
+.DS_Store
