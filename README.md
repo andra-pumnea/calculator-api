@@ -34,11 +34,19 @@ Required:
 
 ## Project Setup 
 
-npm install
+`npm install`
 
 ### Run locally:
-npm run dev
 
-### Run tests:
+`npm run dev`
+
+### Lint files:
+
+`npm run lint` 
+
+### Run tests locally:
+
+```
 npm test
 npm run converage
+```
