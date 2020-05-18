@@ -23,7 +23,7 @@ export function calculate(expression: string): string{
 }
 
 // extract operators and numbers from expression
-export function splitTokens(expression: string): string[]{
+function splitTokens(expression: string): string[]{
     const regex = new RegExp("[+/*()-]|[0123456789]+", "g");
     const matches: string[] = [];
     let match;
@@ -53,7 +53,7 @@ function evaluteExpression(token: string, calculatorStates: CalculatorState): Ca
 }
 
 // check if token is number
-export function isNumber(token: string): boolean{
+function isNumber(token: string): boolean{
     // returns true if NaN, otherwise false so we need to negate
     return ! isNaN(Number(token));
 }
@@ -79,12 +79,12 @@ function evaluateOperatorExpression(token: string, calculatorStates: CalculatorS
 }
 
 // return the last element added to the stack
-export function peek(stack: string[]): string{
+function peek(stack: string[]): string{
     return stack[stack.length-1];
 }
 
 // convert token to Operator interface
-export function convertOperator(token: string): CalculatorOperation{
+function convertOperator(token: string): CalculatorOperation{
     let op: CalculatorOperation = {name: '', precedence:-1};
     switch(token){
         case "+":
@@ -106,7 +106,7 @@ export function convertOperator(token: string): CalculatorOperation{
 }
 
 // check which operator has higher precedence
-export function getPrecedence(op1: CalculatorOperation, op2: CalculatorOperation): boolean{
+function getPrecedence(op1: CalculatorOperation, op2: CalculatorOperation): boolean{
     return op1.precedence > op2.precedence;
 }
 
@@ -119,3 +119,5 @@ function applyOperator(calculatorStates: CalculatorState): CalculatorState{
       calculatorStates.valuesQueue.push(String(result));  
       return calculatorStates;
 }
+
+export {peek, isNumber, splitTokens, convertOperator, getPrecedence}

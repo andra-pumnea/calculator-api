@@ -1,8 +1,4 @@
-import {peek} from '../evaluate';
-import {isNumber} from '../evaluate';
-import {splitTokens} from '../evaluate';
-import {convertOperator} from '../evaluate';
-import {getPrecedence} from '../evaluate';
+import {peek, isNumber, splitTokens, convertOperator, getPrecedence} from '../evaluate';
 
 describe("Helper functions", () => {
     test('should return a string which is the latest item added to the stack', () => {
