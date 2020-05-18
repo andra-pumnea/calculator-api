@@ -47,9 +47,11 @@ Required:
 ### Run tests locally:
 
 `npm test`
+
 `npm run converage` 
 
 ### Deploy to AWS lamnda: 
 
-`sls offline start` (to test deployment locally)
+`sls offline start` 
+
 `sls deploy`
