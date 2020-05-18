@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 interface CalculatorOperation{
     name: string;
     precedence: number;
@@ -22,7 +23,7 @@ export function calculate(expression: string): string{
 }
 
 // extract operators and numbers from expression
-function splitTokens(expression: string): string[]{
+export function splitTokens(expression: string): string[]{
     const regex = new RegExp("[+/*()-]|[0123456789]+", "g");
     const matches: string[] = [];
     let match;
@@ -83,7 +84,7 @@ export function peek(stack: string[]): string{
 }
 
 // convert token to Operator interface
-function convertOperator(token: string): CalculatorOperation{
+export function convertOperator(token: string): CalculatorOperation{
     let op: CalculatorOperation = {name: '', precedence:-1};
     switch(token){
         case "+":
@@ -105,7 +106,7 @@ function convertOperator(token: string): CalculatorOperation{
 }
 
 // check which operator has higher precedence
-function getPrecedence(op1: CalculatorOperation, op2: CalculatorOperation): boolean{
+export function getPrecedence(op1: CalculatorOperation, op2: CalculatorOperation): boolean{
     return op1.precedence > op2.precedence;
 }
 

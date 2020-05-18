@@ -25,6 +25,7 @@
   "scripts": {
     "dev": "ts-node ./src/server.ts",
     "test": "jest",
+    "coverage": "jest --coverage",
     "deploy": "npm run dev && sls deploy"
   },
   "keywords": [],
