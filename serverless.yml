@@ -18,7 +18,7 @@ provider:
 
 functions:
   calculator:
-    handler: handler.calculator
+    handler: ./src/handler.calculator
 
     events:
     - http:
