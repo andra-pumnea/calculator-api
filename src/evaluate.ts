@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 interface CalculatorOperation{
     name: string;
     precedence: number;
@@ -52,7 +53,7 @@ function evaluteExpression(token: string, calculatorStates: CalculatorState): Ca
 }
 
 // check if token is number
-export function isNumber(token: string): boolean{
+function isNumber(token: string): boolean{
     // returns true if NaN, otherwise false so we need to negate
     return ! isNaN(Number(token));
 }
@@ -78,7 +79,7 @@ function evaluateOperatorExpression(token: string, calculatorStates: CalculatorS
 }
 
 // return the last element added to the stack
-export function peek(stack: string[]): string{
+function peek(stack: string[]): string{
     return stack[stack.length-1];
 }
 
@@ -118,3 +119,5 @@ function applyOperator(calculatorStates: CalculatorState): CalculatorState{
       calculatorStates.valuesQueue.push(String(result));  
       return calculatorStates;
 }
+
+export {peek, isNumber, splitTokens, convertOperator, getPrecedence}
