@@ -37,4 +37,4 @@ package:
   exclude:
     - node_modules/**/*
   include:
-    handler.ts
+    ./src/handler.ts

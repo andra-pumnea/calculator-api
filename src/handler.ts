@@ -1,5 +1,5 @@
 import { Handler, Context, Callback } from 'aws-lambda';
-import {calculate} from './src/evaluate';
+import {calculate} from './evaluate';
 
 interface CalculatorResult {
   error: boolean;
