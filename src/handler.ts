@@ -1,5 +1,5 @@
 import { Handler, Context, Callback } from 'aws-lambda';
-import {calculate} from './evaluate';
+import { calculate } from './evaluate';
 
 interface CalculatorResult {
   error: boolean;
@@ -8,32 +8,38 @@ interface CalculatorResult {
 
 // decode query from base64 to ascii
 function decodeQuery(encoded: string): string {
-  const decoded = Buffer.from(encoded, 'base64').toString('ascii')
+  const decoded = Buffer.from(encoded, 'base64').toString('ascii');
   return decoded;
 }
 
-function checkIfQueryExists(event: any): boolean{
+function checkIfQueryExists(event: any): boolean {
   return event.queryStringParameters !== null;
 }
 
 function getResponse(calculatedExpression: string): CalculatorResult {
-  if(calculatedExpression !== "NaN"){
-    return {error: false, result: calculatedExpression} 
-  } 
-  else {
-      return {error: true, result: "expression is incorrect"}
+  if (calculatedExpression !== 'NaN') {
+    return { error: false, result: calculatedExpression };
+  } else {
+    return { error: true, result: 'expression is incorrect' };
   }
 }
 
-const calculator: Handler = (event: any, context: Context, callback: Callback) => {
-  if(checkIfQueryExists(event)){
-    const query = decodeQuery(event.queryStringParameters.query)
-    const calculatedExpression = calculate(query)
+const calculator: Handler = (
+  event: any,
+  context: Context,
+  callback: Callback
+) => {
+  if (checkIfQueryExists(event)) {
+    const query = decodeQuery(event.queryStringParameters.query);
+    const calculatedExpression = calculate(query);
     const response = getResponse(calculatedExpression);
-    callback(undefined, {statusCode: 200, body: JSON.stringify(response)} );
+    callback(undefined, { statusCode: 200, body: JSON.stringify(response) });
   }
   // TODO: error callback
-  callback(undefined, {statusCode: 200, body: JSON.stringify("Please enter query")} );
+  callback(undefined, {
+    statusCode: 200,
+    body: JSON.stringify('Please enter query')
+  });
 };
 
-export { calculator }
+export { calculator };
